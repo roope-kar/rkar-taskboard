@@ -1,0 +1,25 @@
+{
+  "name": "rkar-taskboard",
+  "version": "1.0.0",
+  "description": "Collaborative taskboard for creating and organizing actionable items",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/roope-kar/rkar-taskboard.git"
+  },
+  "keywords": [
+    "websocket",
+    "webcomponents",
+    "css",
+    "esbuild"
+  ],
+  "author": "Roope Karhapää",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/roope-kar/rkar-taskboard/issues"
+  },
+  "homepage": "https://github.com/roope-kar/rkar-taskboard#readme",
+  "devDependencies": {
+    "esbuild": "^0.8.5"
+  }
+}
