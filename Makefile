@@ -16,6 +16,9 @@ js:
 gzip:
 	gzip --best `find static/build/*.js`
 
+brotli:
+	brotli `find static/build/*.js`
+
 hash:
 	cp static/build/index.js static/build/index.$(shell git hash-object static/build/index.js | cut -b 1-10).js
 

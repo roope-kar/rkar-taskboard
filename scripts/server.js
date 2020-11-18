@@ -9,7 +9,8 @@ const mimeTypes = {
     '.html': 'text/html',
     '.js': 'text/javascript',
     '.css': 'text/css',
-    '.gz': 'text/javascript'
+    '.gz': 'text/javascript',
+    '.br': 'text/javascript'
 };
 
 const server = http.createServer(async (req, res) => {
@@ -22,6 +23,8 @@ const server = http.createServer(async (req, res) => {
         res.setHeader("Content-Type", mimeTypes[fileExtension]);
         if(fileExtension === '.gz') {
             res.setHeader("Content-Encoding", "gzip");
+        } else if(fileExtension === '.br') {
+            res.setHeader("Content-Encoding", "br");
         }
         res.end(fileContent);
     } catch(e) {
