@@ -1,16 +1,22 @@
-export class A extends HTMLElement {
+export default class A extends HTMLElement {
 
     static get observedAttributes() { 
-        return ['secret']; 
+        return ['secret', 'value']; 
     }
     
     constructor() {
         super();
-        const template = document.querySelector('.A');
+        const template = document.createElement('template');
+        template.innerHTML = `
+        <div>
+            <style>
+                div { color: blue; }
+            </style>
+            <slot name="my-text">default message</slot>
+            <div>A!</div>
+        </div>
+        `;
         this.attachShadow({ mode: 'open' }).appendChild(template.content.cloneNode(true));
-        
-        /* var clone = document.importNode(t.content, true);
-        document.body.appendChild(clone); */
     }
 
     connectedCallback() {
@@ -28,4 +34,4 @@ export class A extends HTMLElement {
     }
 }
 
-customElements.define('rkar-a', A, { extends: '' });
+customElements.define('rkar-a', A);

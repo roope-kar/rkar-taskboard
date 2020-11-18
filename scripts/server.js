@@ -1,25 +1,39 @@
 const http = require('http');
 const fs = require('fs');
 const path = require('path');
-const staticPath = path.resolve(__filename, '..', 'static');
-const indexPath = path.resolve(__filename, '..', 'static', 'index.html');
+const util = require('util');
+const url = require('url');
 const [ port ] = process.argv.slice(2);
 
-http.createServer(async (req, res) => {
+const mimeTypes = {
+    '.html': 'text/html',
+    '.js': 'text/javascript',
+    '.css': 'text/css',
+    '.gz': 'text/javascript'
+};
 
-    const { pathname } = new URL(req.url);
-    
+const server = http.createServer(async (req, res) => {
+    const { pathname } = url.parse(req.url);
     try {
-        res.writeHead(200, 'OK');
-        res.write(await fs.readFile(path.resolve(staticPath, pathname)));
-        res.end();
+        const filePath = path.resolve(__dirname, '..', 'static') + pathname;
+        const fileExtension = path.extname(filePath);
+        const fileContent = await util.promisify(fs.readFile)(filePath);
+        res.setHeader("Status", 200);
+        res.setHeader("Content-Type", mimeTypes[fileExtension]);
+        if(fileExtension === '.gz') {
+            res.setHeader("Content-Encoding", "gzip");
+        }
+        res.end(fileContent);
     } catch(e) {
-        res.writeHead(404, 'Not Found :P');
-        res.write(await fs.readFile(indexPath));
-        res.end();
+        const filePath = path.resolve(__dirname, '..', 'static', 'index.html');
+        const fileContent = await util.promisify(fs.readFile)(filePath);
+        res.setHeader("Status", 200);
+        res.setHeader("Content-Type", mimeTypes[path.extname(filePath)]);
+        res.end(fileContent);
     }
+});
 
-}).listen(port, error => {
+server.listen(port, error => {
     if(error) {
         console.error(error);
     } else {
