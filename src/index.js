@@ -1,1 +1,1 @@
-import './components/A/A';
+import './components/Joke/Joke';

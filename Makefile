@@ -10,7 +10,6 @@ js:
 		--target=es2020 \
 		--sourcemap \
 		--format=esm \
-		--define:process.env.NODE_ENV='"production"' \
 		--outdir=static/build
 
 gzip:
@@ -28,4 +27,4 @@ test: ./scripts/test.js
 dev: ./scripts/server.js
 	node scripts/server.js 9000
 
-build: clean js hash gzip
+build: clean js hash brotli
