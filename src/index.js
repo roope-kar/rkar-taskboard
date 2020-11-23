@@ -1,1 +1,2 @@
-import './components/Joke/Joke';
+import './components/taskboard/taskboard';
+import './components/task/task';
