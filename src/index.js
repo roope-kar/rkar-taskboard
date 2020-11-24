@@ -1,2 +1,8 @@
-import './components/taskboard/taskboard';
-import './components/task/task';
+import './components/taskboard';
+import './components/task';
+
+import './router';
+
+customElements.define('rkar-app', class extends HTMLElement {
+    
+});

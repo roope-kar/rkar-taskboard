@@ -1,4 +1,5 @@
 export default customElements.define('rkar-taskboard', class extends HTMLElement {
+
     constructor() {
         super();
         this.attachShadow({ mode: 'open' });
@@ -18,7 +19,7 @@ export default customElements.define('rkar-taskboard', class extends HTMLElement
             <p>Taskboard</p>
             <slot name="tasks"></slot>
         `;
-        return template.content.cloneNode(true)
+        return template.content.cloneNode(true);
     }
     
 });

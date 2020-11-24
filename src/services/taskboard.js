@@ -1,4 +1,4 @@
-export class TaskBoardService {
+export class TaskboardService {
 
     constructor() {
         this.subscription;
