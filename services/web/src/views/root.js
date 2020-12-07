@@ -1,4 +1,4 @@
-const { pushState, replaceState } = require("../router");
+const { pushState } = require("../router");
 
 customElements.define('rkar-app', class extends HTMLElement {
     
@@ -8,12 +8,21 @@ customElements.define('rkar-app', class extends HTMLElement {
         this.shadowRoot.appendChild(this.getStyle());
         this.shadowRoot.appendChild(this.getTemplate());
 
-        window.addEventListener('popstate', () => {
-            console.log('ROOT! | pop');
-        });
+        if(window.location.pathname === '/1') {
+            console.log('insert content for 1');
+        }
+        if(window.location.pathname === '/2') {
+            console.log('insert content for 2');
+        }
 
-        window.addEventListener('pushstate', () => {
-            console.log('ROOT! | push');
+        window.addEventListener('route', (event) => {
+            window.console.log(event.detail.state);
+            if(window.location.pathname === '/1') {
+                console.log('insert content for 1');
+            }
+            if(window.location.pathname === '/2') {
+                console.log('insert content for 2');
+            }
         });
 
     }
@@ -29,18 +38,18 @@ customElements.define('rkar-app', class extends HTMLElement {
         const h2 = document.createElement('h2');
         h2.innerText = 'Root';
         const buttonPush = document.createElement('button');
-        const buttonPop = document.createElement('button');
-        buttonPush.innerText = 'push';
-        buttonPop.innerText = 'pop';
+        const buttonReplace = document.createElement('button');
+        buttonPush.innerText = 'Push 1';
+        buttonReplace.innerText = 'Push 2';
         buttonPush.addEventListener('click', () => {
             pushState({}, '1', '/1');
         });
-        buttonPop.addEventListener('click', () => {
-            replaceState({}, '2', '/2');
+        buttonReplace.addEventListener('click', () => {
+            pushState({}, '2', '/2');
         });
         template.appendChild(h2);
         template.appendChild(buttonPush);
-        template.appendChild(buttonPop);
+        template.appendChild(buttonReplace);
         return template;
     }
 
