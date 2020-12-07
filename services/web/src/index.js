@@ -1,8 +1,9 @@
+// Components
 import './components/taskboard';
 import './components/task';
 
-import './router';
+// Views
+import './views/root';
 
-customElements.define('rkar-app', class extends HTMLElement {
-    
-});
+// Router
+import './router';

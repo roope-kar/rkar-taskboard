@@ -1,7 +1,3 @@
-window.addEventListener('pushstate', event => {
-    window.console.log(window.location.pathname, event.detail.state);
-});
-
 window.addEventListener('popstate', event => {
     window.console.log(window.location.pathname, event.state);
 });

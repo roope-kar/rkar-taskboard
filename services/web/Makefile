@@ -28,3 +28,5 @@ dev: ./scripts/server.js
 	node scripts/server.js 9000
 
 build: clean js hash brotli
+
+dev-build: build dev
